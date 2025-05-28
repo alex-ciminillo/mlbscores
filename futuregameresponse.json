@@ -1,0 +1,72 @@
+{
+  "gamePk": 778869,
+  "gameGuid": "bdfebb15-f31a-405e-b089-6ba29b6e4a81",
+  "link": "/api/v1.1/game/778869/feed/live",
+  "gameType": "S",
+  "season": "2025",
+  "gameDate": "2025-02-20T20:05:00Z",
+  "officialDate": "2025-02-20",
+  "status": {
+    "abstractGameState": "Preview",
+    "codedGameState": "S",
+    "detailedState": "Scheduled",
+    "statusCode": "S",
+    "startTimeTBD": false,
+    "abstractGameCode": "P"
+  },
+  "teams": {
+    "away": {
+      "leagueRecord": {
+        "wins": 0,
+        "losses": 0,
+        "pct": ".000"
+      },
+      "team": {
+        "id": 112,
+        "name": "Chicago Cubs",
+        "link": "/api/v1/teams/112"
+      },
+      "splitSquad": false,
+      "seriesNumber": 1
+    },
+    "home": {
+      "leagueRecord": {
+        "wins": 0,
+        "losses": 0,
+        "pct": ".000"
+      },
+      "team": {
+        "id": 119,
+        "name": "Los Angeles Dodgers",
+        "link": "/api/v1/teams/119"
+      },
+      "splitSquad": false,
+      "seriesNumber": 1
+    }
+  },
+  "venue": {
+    "id": 3809,
+    "name": "Camelback Ranch",
+    "link": "/api/v1/venues/3809"
+  },
+  "content": {
+    "link": "/api/v1/game/778869/content"
+  },
+  "gameNumber": 1,
+  "publicFacing": true,
+  "doubleHeader": "N",
+  "gamedayType": "E",
+  "tiebreaker": "N",
+  "calendarEventID": "14-778869-2025-02-20",
+  "seasonDisplay": "2025",
+  "dayNight": "day",
+  "scheduledInnings": 9,
+  "reverseHomeAwayStatus": false,
+  "inningBreakLength": 120,
+  "gamesInSeries": 2,
+  "seriesGameNumber": 1,
+  "seriesDescription": "Spring Training",
+  "recordSource": "S",
+  "ifNecessary": "N",
+  "ifNecessaryDescription": "Normal Game"
+}
