@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+
+// Start date should always be the past 9 AM time of the local timezone
 export const getMLBGamesToday = async () => {
   const url = 'https://statsapi.mlb.com/api/v1/schedule';
   const params = {
     sportId: 1, 
-    date: new Date().toISOString().split('T')[0],
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60 * 1000 - 9 * 60 * 60 * 1000).toISOString().split('T')[0],
   };
 
   try {
@@ -42,7 +44,7 @@ export const getLiveGameData = async (gamePk: string) => {
     }
 };
 
-
+// Start date should always be the past 9 AM time of the local timezone
 export const getUpcomingMLBGamesThisWeek = async () => {
     const url = 'https://statsapi.mlb.com/api/v1/schedule';
     const params = {
@@ -59,11 +61,11 @@ export const getUpcomingMLBGamesThisWeek = async () => {
     }
 };
 
-
+// Start date should always be the past 9 AM time of the local timezone
 export const getUpcomingMLBGamesThisMonth = async () => {
     const url = 'https://statsapi.mlb.com/api/v1/schedule';
     const today = new Date();
-    const startDate = today.toISOString().split('T')[0];
+    const startDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60 * 1000 - 9 * 60 * 60 * 1000).toISOString().split('T')[0];
     const endDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     const params = {
         sportId: 1, // MLB sport ID

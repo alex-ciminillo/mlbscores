@@ -111,8 +111,8 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
         >
           <BubbleNumber
             imageWidth={imageWidth}
-            number={testScores ? "0" : batterDigitOne || (isGameInProgress ? "0" : "")}
-            hide={!testScores || batterDigitOne === "0"}
+            number={testScores ? "0" : batterDigitOne === 0 ? "0" : batterDigitOne ? batterDigitOne : 0}
+            hide={!testScores || batterDigitOne === 0}
           />
         </Text>
         <Text

@@ -18,7 +18,6 @@ export function SingleGameScore({ game, red, label, imageWidth, cubs }) {
   const homeTeam = game?.gameData?.teams?.home || {};
   const awayTeam = game?.gameData?.teams?.away || {};
   let innings = game?.liveData?.linescore?.innings || [];
-  const currentInning = game?.liveData?.linescore?.currentInning || 0;
 
   const isGameBlank = !game || Object.keys(game).length === 0;
 
@@ -220,12 +219,10 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             >
               {/* there should be an additional pixel of padding on the left for each index. Ex: index 1 should have 1 pixel of padding, index 2 should have 2 pixels of padding, etc */}
               <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                {testScores ? "0" : label
+                {testScores ? "0" : beforeGame ? " " : label
                   ? index + 1
                   : index < 9
-                  ? index <= currentInning
-                    ? innings[index]?.home?.runs || beforeGame ? " " : "0"
-                    : " "
+                  ? innings[index]?.home?.runs 
                   : homeTotal}
               </Text>
             </View>
@@ -309,11 +306,11 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 ]}
               >
                 <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                  {testScores ? "0" : index < 9
-                    ? index < currentInning
-                      ? innings[index]?.away?.runs || beforeGame ? " " : "0"
-                      : " "
-                    : awayTotal}
+                  {testScores ? "0" : beforeGame ? " " : label
+                  ? index + 1
+                  : index < 9
+                  ? innings[index]?.away?.runs 
+                  : awayTotal}
                 </Text>
               </View>
               {index % 3 === 2 && (

@@ -53,8 +53,11 @@ export function MiddleSectionTop({ gamesToday, cubGameData, imageWidth }) {
   }
 
   const [cubDigitOne, cubDigitTwo] = splitToDigits(cubsScore);
+  console.log("cubDigitOne", cubDigitOne)
+  console.log("cubDigitTwo", cubDigitTwo)
   const [otherDigitOne, otherDigitTwo] = splitToDigits(otherTeamScore);
-  console.log("cubGameData", cubGameData)
+  console.log("otherDigitOne", otherDigitOne)
+  console.log("otherDigitTwo", otherDigitTwo)
 // check game over using abstractGameState and cubGameData
 //GameData to get isGameOver
    let isGameOver = cubGameData?.gameData?.status?.abstractGameState === "Final";
@@ -118,8 +121,8 @@ const testScores = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "0" : cubDigitOne || ""}
-                hide={!testScores || cubDigitOne === "0"}
+                number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : ""}
+                hide={!testScores || cubDigitOne === 0}
               />
             </Text>
             <Text
@@ -183,8 +186,8 @@ const testScores = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "0" : otherDigitOne || ""}
-                hide={!testScores || otherDigitOne === "0"}
+                number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : ""}
+                hide={!testScores || otherDigitOne === 0}
               />
             </Text>
             <Text
@@ -237,7 +240,7 @@ const testScores = false;
             {cubGameData?.liveData?.linescore?.currentInning}
           </Text>
         ) : is10Innings ? (
-          <Text style={styles.text}>Final/10</Text>
+          <Text style={styles.text}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
         ) : (
           <Text style={styles.text}>Final</Text>
         )}
