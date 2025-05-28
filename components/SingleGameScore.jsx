@@ -146,6 +146,95 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
         },
       ]}
     >
+      
+      {game?.gameData?.teams?.home && !game?.gameData?.teams?.away ? null : (
+        <View style={[{ flexDirection: "row" }]}>
+          <View
+            aria-label="away-SP"
+            style={[
+              styles.borderRight,
+              styles.borderLeft,
+              styles.borderTop,
+              styles.borderBottom,
+              {
+                width: imageWidth / 60,
+                alignItems: "center",
+              },
+              styles.backgroundTint,
+            ]}
+          >
+            <Text style={styles.text}>{awaySP || (game ? "-" : "")}</Text>
+          </View>
+          <View
+            aria-label="away-RP"
+            style={[
+              styles.borderRight,
+              styles.borderTop,
+              styles.borderBottom,
+              {
+                width: imageWidth / 60,
+                alignItems: "center",
+                marginLeft: imageWidth / 70,
+              },
+              styles.backgroundTint,
+            ]}
+          >
+            <Text style={styles.text}>{awayRP}</Text>
+          </View>
+          <View
+            aria-label="away-name"
+            style={[
+              styles.borderRight,
+              styles.borderTop,
+              styles.borderBottom,
+              {
+                width: imageWidth / 11,
+                alignItems: "flex-start",
+                marginLeft: imageWidth / 70,
+              },
+              styles.backgroundTint,
+            ]}
+          >
+            <Text style={styles.text}>
+              {newAwayTeamName || awayTeam.teamName || (game ? "" : "")}
+            </Text>
+          </View>
+          {Array.from({ length: 10 }).map((_, index) => (
+            <React.Fragment key={`away-inning-fragment-${index}`}>
+              <View
+                key={`away-inning-${index}`}
+                aria-label={`away-inning-${index + 1}-score`}
+                style={[
+                  styles.borderRight,
+                  styles.borderTop,
+                  styles.borderBottom,
+                  {
+                    width: imageWidth / 70,
+                    alignItems: "center",
+                    marginLeft: imageWidth / 155,
+                  },
+                  styles.backgroundTint,
+                  index !== 0 && index % 3 === 0 && styles.borderLeft,
+                ]}
+              >
+                <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
+                  {testScores ? "0" : beforeGame ? " " : label
+                  ? index + 1
+                  : index < 9
+                  ? innings[index]?.away?.runs 
+                  : awayTotal}
+                </Text>
+              </View>
+              {index % 3 === 2 && (
+                <View
+                  key={`section2-${index}`}
+                  style={[styles.borderRightSection, styles.borderTopSection]}
+                ></View>
+              )}
+            </React.Fragment>
+          ))}
+        </View>
+      )}
       <View style={[{ flexDirection: "row" }]}>
         <View
           aria-label="home-SP"
@@ -235,94 +324,6 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
           </React.Fragment>
         ))}
       </View>
-      {game?.gameData?.teams?.home && !game?.gameData?.teams?.away ? null : (
-        <View style={[{ flexDirection: "row" }]}>
-          <View
-            aria-label="away-SP"
-            style={[
-              styles.borderRight,
-              styles.borderLeft,
-              styles.borderTop,
-              styles.borderBottom,
-              {
-                width: imageWidth / 60,
-                alignItems: "center",
-              },
-              styles.backgroundTint,
-            ]}
-          >
-            <Text style={styles.text}>{awaySP || (game ? "-" : "")}</Text>
-          </View>
-          <View
-            aria-label="away-RP"
-            style={[
-              styles.borderRight,
-              styles.borderTop,
-              styles.borderBottom,
-              {
-                width: imageWidth / 60,
-                alignItems: "center",
-                marginLeft: imageWidth / 70,
-              },
-              styles.backgroundTint,
-            ]}
-          >
-            <Text style={styles.text}>{awayRP}</Text>
-          </View>
-          <View
-            aria-label="away-name"
-            style={[
-              styles.borderRight,
-              styles.borderTop,
-              styles.borderBottom,
-              {
-                width: imageWidth / 11,
-                alignItems: "flex-start",
-                marginLeft: imageWidth / 70,
-              },
-              styles.backgroundTint,
-            ]}
-          >
-            <Text style={styles.text}>
-              {newAwayTeamName || awayTeam.teamName || (game ? "" : "")}
-            </Text>
-          </View>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <React.Fragment key={`away-inning-fragment-${index}`}>
-              <View
-                key={`away-inning-${index}`}
-                aria-label={`away-inning-${index + 1}-score`}
-                style={[
-                  styles.borderRight,
-                  styles.borderTop,
-                  styles.borderBottom,
-                  {
-                    width: imageWidth / 70,
-                    alignItems: "center",
-                    marginLeft: imageWidth / 155,
-                  },
-                  styles.backgroundTint,
-                  index !== 0 && index % 3 === 0 && styles.borderLeft,
-                ]}
-              >
-                <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                  {testScores ? "0" : beforeGame ? " " : label
-                  ? index + 1
-                  : index < 9
-                  ? innings[index]?.away?.runs 
-                  : awayTotal}
-                </Text>
-              </View>
-              {index % 3 === 2 && (
-                <View
-                  key={`section2-${index}`}
-                  style={[styles.borderRightSection, styles.borderTopSection]}
-                ></View>
-              )}
-            </React.Fragment>
-          ))}
-        </View>
-      )}
     </View>
   );
 }
