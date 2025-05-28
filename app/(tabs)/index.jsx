@@ -250,65 +250,82 @@ export default function HomeScreen() {
       style={styles.cloudImage}
     >
       <View style={styles.imageContainer}>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: -1
+        }}
+      >
+        <source src={require("@/assets/videos/Final Video Try 2.mp4")} type="video/mp4" />
+      </video>
         <ImageBackground
           source={require("@/assets/images/wrigley-no-clouds.png")}
           style={styles.image}
         >
-          <View
-            id="top"
-            style={{
-              position: "absolute",
-              width: imageWidth,
-              height: imageHeight,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <TheCrown imageWidth={imageWidth} />
-          </View>
-          <View
-            id="bottom"
-            style={{
-              position: "absolute",
-              width: imageWidth,
-              height: imageHeight,
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-end",
-              backgroundColor: "transparent",
-              marginLeft: imageWidth / 20.7,
-              marginTop: -(imageWidth / 11.9),
-            }}
-          >
-            <View style={styles.container}>
-              <ScoreBoardSingleSide
-                imageWidth={imageWidth}
-                game={nationalGames}
-                cubs={cubGameData}
-                title={{ text: "National", pos: "flex-end" }}
-              />
-              <View style={{  marginBottom: (imageWidth / 900) }} >
+        <View
+          id="top"
+          style={{
+            position: "absolute",
+            width: imageWidth,
+            height: imageHeight,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <TheCrown imageWidth={imageWidth} />
+        </View>
+        <View
+          id="bottom"
+          style={{
+            position: "absolute",
+            width: imageWidth,
+            height: imageHeight,
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-end",
+            backgroundColor: "transparent",
+            marginLeft: imageWidth / 20.7,
+            marginTop: -(imageWidth / 11.9),
+          }}
+        >
+          <View style={styles.container}>
+            <ScoreBoardSingleSide
+              imageWidth={imageWidth}
+              game={nationalGames}
+              cubs={cubGameData}
+              title={{ text: "National", pos: "flex-end" }}
+            />
+            <View style={{  marginBottom: (imageWidth / 900) }} >
               <MiddleSection
                 cubGameData={cubGameData}
                 imageWidth={imageWidth}
                 gamesToday={gamesToday}
               /></View>
-              <View
-                style={{
-                  justifyContent: "flex-end",
-                  marginLeft: imageWidth / 30,
-                }}
-              >
-                <ScoreBoardSingleSide
-                  imageWidth={imageWidth}
-                  game={americanGames}
-                  cubs={null}
-                  title={{ text: "American", pos: "flex-start" }}
-                  rightSide={true}
-                />
-              </View>
+            <View
+              style={{
+                justifyContent: "flex-end",
+                marginLeft: imageWidth / 30,
+              }}
+            >
+              <ScoreBoardSingleSide
+                imageWidth={imageWidth}
+                game={americanGames}
+                cubs={null}
+                title={{ text: "American", pos: "flex-start" }}
+                rightSide={true}
+              />
             </View>
           </View>
+        </View>
         </ImageBackground>
       </View>
     </ImageBackground>
