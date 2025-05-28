@@ -20,7 +20,7 @@ export default class AnalogClock extends Component {
       let d = new Date();
       this.setState({
         sec: d.getSeconds() * 6,
-        min: d.getMinutes() * 6,
+        min: (d.getMinutes() * 6) + (d.getSeconds() * 6) / 60,
         hour:
           ((d.getHours() % 12) / 12) * 360 +
           (d.getMinutes() * 6 + (d.getSeconds() * 6) / 60) / 12,
