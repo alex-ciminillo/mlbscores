@@ -21,6 +21,8 @@ export function SingleGameScore({ game, red, label, imageWidth, cubs }) {
   let isGameOver = game?.gameData?.status?.abstractGameState === "Final";
   const isGameBlank = !game || Object.keys(game).length === 0;
   let isTop = game?.liveData?.linescore?.inningHalf === "top"
+  let isBottom = game?.liveData?.linescore?.inningHalf === "bottom"
+  const currentInning = game?.liveData?.linescore?.inning || 0;
   let homeTotal = game
     ? innings.reduce((total, inning) => total + (inning.home?.runs || 0), 0)
     : " ";
@@ -220,7 +222,11 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                   index !== 0 && index % 3 === 0 && styles.borderLeft,
                 ]}
               >
-                <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
+                <Text style={[styles.text, { 
+                  paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null,
+                  marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null,
+                  color: red && isTop && index === currentInning ? Colors.light.highlight : undefined
+                }]}>
                   {testScores ? "0" : beforeGame || (isGameOver && index < 9) ? " " : label
                   ? index + 1
                   : index < 9
@@ -310,7 +316,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               ]}
             >
               {/* there should be an additional pixel of padding on the left for each index. Ex: index 1 should have 1 pixel of padding, index 2 should have 2 pixels of padding, etc */}
-              <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
+              <Text style={[styles.text, { color: red && isBottom && index === currentInning ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
                 {testScores ? "0" : beforeGame || (isGameOver && index < 9) ? " " : label
                   ? index + 1
                   : index < 9
