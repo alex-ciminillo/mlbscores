@@ -18,9 +18,9 @@ export function SingleGameScore({ game, red, label, imageWidth, cubs }) {
   const homeTeam = game?.gameData?.teams?.home || {};
   const awayTeam = game?.gameData?.teams?.away || {};
   let innings = game?.liveData?.linescore?.innings || [];
-
+  let isGameOver = game?.gameData?.status?.abstractGameState === "Final";
   const isGameBlank = !game || Object.keys(game).length === 0;
-
+  let isTop = game?.liveData?.linescore?.inningHalf === "top"
   let homeTotal = game
     ? innings.reduce((total, inning) => total + (inning.home?.runs || 0), 0)
     : " ";
@@ -163,7 +163,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               styles.backgroundTint,
             ]}
           >
-            <Text style={styles.text}>{awaySP || (game ? "-" : "")}</Text>
+            <Text style={styles.text}>{isGameOver ? " " : awaySP || (game ? "-" : "")}</Text>
           </View>
           <View
             aria-label="away-RP"
@@ -179,7 +179,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               styles.backgroundTint,
             ]}
           >
-            <Text style={styles.text}>{awayRP}</Text>
+            <Text style={styles.text}>{isGameOver ? " " : awayRP}</Text>
           </View>
           <View
             aria-label="away-name"
@@ -218,11 +218,11 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 ]}
               >
                 <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                  {testScores ? "0" : beforeGame ? " " : label
+                  {testScores ? "0" : beforeGame || isGameOver ? " " : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.away?.runs 
-                  : awayTotal}
+                  : isGameOver ? awayTotal : " "}
                 </Text>
               </View>
               {index % 3 === 2 && (
@@ -250,7 +250,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
           ]}
         >
           <Text style={styles.text}>
-            {label ? "SP" : homeSP || (game ? "-" : " ")}
+            {label ? "SP" : isGameOver ? " " : homeSP || (game ? "-" : " ")}
           </Text>
         </View>
         <View
@@ -266,7 +266,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             styles.backgroundTint,
           ]}
         >
-          <Text style={styles.text}>{label ? "RP" : homeRP}</Text>
+          <Text style={styles.text}>{label ? "RP" : isGameOver ? " " : homeRP}</Text>
         </View>
         <View
           aria-label="home-name"
@@ -308,11 +308,11 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             >
               {/* there should be an additional pixel of padding on the left for each index. Ex: index 1 should have 1 pixel of padding, index 2 should have 2 pixels of padding, etc */}
               <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                {testScores ? "0" : beforeGame ? " " : label
+                {testScores ? "0" : beforeGame || isGameOver ? " " : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.home?.runs 
-                  : homeTotal}
+                  : isGameOver ? homeTotal : " "}
               </Text>
             </View>
             {index % 3 === 2 && (
