@@ -83,7 +83,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
   });
 
   const testScores = false;
-
+  
   return (
     <View style={[styles.container, { marginBottom: -(imageWidth / 900) }]}>
       <View
@@ -227,7 +227,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
           />
         </Text>
       </View>
-      <View
+      {!isCubsHome ? <View
         style={[
           {
             flexDirection: "row",
@@ -244,23 +244,24 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
             style={styles.image}
           />
         </View> */}
+        
         <View style={{ marginBottom: -(imageWidth / 1500), flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "flex-start",
             width: "100%", }}>
           <View style={[styles.box, { width: imageWidth / 31,
             height: imageWidth / 65, marginLeft: imageWidth / 50 }]}>
-            <Text style={styles.text}>CHC</Text>
+            <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>CHC</Text>
           </View>
           <View style={(styles.box, { marginLeft: imageWidth / 270,width: imageWidth / 65,
             height: imageWidth / 65,  display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" })}>
-            <Text style={styles.text}>
+            <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>
             {testScores ? "55" : cubsHits !== undefined ? cubsHits : isGameInProgress ? "0" : "   "}
           </Text>
         </View>
         <View style={[styles.box, { marginLeft: imageWidth / 25.5,width: imageWidth / 65,
             height: imageWidth / 65, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }]}>
-          <Text style={styles.text}>
+          <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>
             {testScores ? "55" : otherTeamHits !== undefined
               ? otherTeamHits
               : isGameInProgress
@@ -270,10 +271,59 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
         </View>
         <View style={[styles.box, { marginLeft: imageWidth / 255,width: imageWidth / 31,
             height: imageWidth / 65 }]}>
-          <Text style={styles.text}>{otherTeamAbbreviation || "--"}</Text>
+          <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>{otherTeamAbbreviation || "--"}</Text>
+        </View>
+      </View>
+      </View> : <View
+        style={[
+          {
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            width: "100%",
+            marginBottom: -(imageWidth / 50),
+          },
+        ]}
+      >
+        {/* <View style={styles.imageContainer}>
+          <Image
+            source={require("@/assets/images/cubs.png")}
+            style={styles.image}
+          />
+        </View> */}
+        
+        <View style={{ marginBottom: -(imageWidth / 1500), flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            width: "100%", }}>
+          <View style={[styles.box, { width: imageWidth / 31,
+            height: imageWidth / 65, marginLeft: imageWidth / 50 }]}>
+            <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>{otherTeamAbbreviation || "--"}</Text>
+          </View>
+          <View style={(styles.box, { marginLeft: imageWidth / 270,width: imageWidth / 65,
+            height: imageWidth / 65,  display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" })}>
+            <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>
+            {testScores ? "55" : otherTeamHits !== undefined
+              ? otherTeamHits
+              : isGameInProgress
+              ? "0"
+              : "   "}
+            </Text>
+        </View>
+        <View style={[styles.box, { marginLeft: imageWidth / 25.5,width: imageWidth / 65,
+            height: imageWidth / 65, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }]}>
+          <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>
+          {testScores ? "55" : cubsHits !== undefined ? cubsHits : isGameInProgress ? "0" : "   "}
+         
+          </Text>
+        </View>
+        <View style={[styles.box, { marginLeft: imageWidth / 255,width: imageWidth / 31,
+            height: imageWidth / 65 }]}>
+          <Text style={[styles.text, {color: "rgb(217, 210, 90)"}]}>CHC</Text>
         </View>
       </View>
       </View>
+      }
     </View>
   );
 }
