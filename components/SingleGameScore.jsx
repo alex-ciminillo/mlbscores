@@ -30,7 +30,8 @@ export function SingleGameScore({ game, red, label, imageWidth, cubs }) {
   let awayTotal = game
     ? innings.reduce((total, inning) => total + (inning.away?.runs || 0), 0)
     : " ";
-
+console.log("homeTotal", homeTotal)
+console.log("awayTotal", awayTotal)
     // homeTotal and awayTotal should be " " if the game has not started yet
     /* datetime looks like this: {
     "dateTime": "2025-05-24T20:10:00Z",
@@ -54,7 +55,8 @@ let beforeGame = false;
         beforeGame = true;
       }
     }
-
+    console.log("homeTotal2", homeTotal)
+    console.log("awayTotal2", awayTotal)
   const homeSPID = game?.gameData?.probablePitchers?.home?.id;
   const awaySPID = game?.gameData?.probablePitchers?.away?.id;
 
@@ -133,6 +135,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
   }
 
   console.log("game", game)
+  console.log()
 
   return (
     <View
@@ -218,7 +221,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 ]}
               >
                 <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                  {testScores ? "0" : beforeGame || isGameOver ? " " : label
+                  {testScores ? "0" : beforeGame || (isGameOver && index < 9) ? " " : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.away?.runs 
@@ -308,7 +311,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             >
               {/* there should be an additional pixel of padding on the left for each index. Ex: index 1 should have 1 pixel of padding, index 2 should have 2 pixels of padding, etc */}
               <Text style={[styles.text, { paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                {testScores ? "0" : beforeGame || isGameOver ? " " : label
+                {testScores ? "0" : beforeGame || (isGameOver && index < 9) ? " " : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.home?.runs 
