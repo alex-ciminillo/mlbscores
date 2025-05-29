@@ -4,9 +4,21 @@ import axios from 'axios';
 // Start date should always be the past 9 AM time of the local timezone
 export const getMLBGamesToday = async () => {
   const url = 'https://statsapi.mlb.com/api/v1/schedule';
+
+  const today = new Date();
+  let startDate;
+  // if current time is past 9 am
+  if (today.getHours() >= 9) {
+    startDate = new Date(today.toISOString().split('T')[0]).toISOString().split('T')[0];
+
+  } else {
+// startDate will be yesterday at midnight
+    startDate = new Date(today.setDate(today.getDate() - 1)).toISOString().split('T')[0];
+
+  }
   const params = {
     sportId: 1, 
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60 * 1000 - 9 * 60 * 60 * 1000).toISOString().split('T')[0],
+    date: startDate,
   };
 
   try {
@@ -61,11 +73,19 @@ export const getUpcomingMLBGamesThisWeek = async () => {
     }
 };
 
-// Start date should always be the past 9 AM time of the local timezone
 export const getUpcomingMLBGamesThisMonth = async () => {
     const url = 'https://statsapi.mlb.com/api/v1/schedule';
     const today = new Date();
-    const startDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60 * 1000 - 9 * 60 * 60 * 1000).toISOString().split('T')[0];
+    let startDate;
+    // if current time is past 9 am
+    if (today.getHours() >= 9) {
+      startDate = new Date(today.toISOString().split('T')[0]).toISOString().split('T')[0];
+
+    } else {
+// startDate will be yesterday at midnight
+      startDate = new Date(today.setDate(today.getDate() - 1)).toISOString().split('T')[0];
+
+    }
     const endDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     const params = {
         sportId: 1, // MLB sport ID

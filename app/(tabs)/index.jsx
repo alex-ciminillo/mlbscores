@@ -52,7 +52,7 @@ export default function HomeScreen() {
           console.log('No games found for today');
           return gamesMonthly;
         }
-        
+        console.log("today",todayEntry)
         // Find the first Cubs game in today's games
         const cubsGame = todayEntry?.games?.find(game => {
           const isCubsAway = game.teams.away.team.name === 'Chicago Cubs';
@@ -70,7 +70,7 @@ export default function HomeScreen() {
         
         if (!cubsGame) {
           console.log('No Cubs game found in today\'s games');
-          return gamesMonthly;
+          // return gamesMonthly;
         }
         
         // function that takes in gamesMonthly and a gamePk and removes that game from gamesMonthly
