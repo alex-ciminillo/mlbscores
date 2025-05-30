@@ -145,7 +145,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const refreshInterval = setInterval(() => {
       getMonthGames();
-    }, 30000); // 30 seconds
+    }, 10000); // 30 seconds
 
     // Initial fetch
     getMonthGames();
