@@ -9,9 +9,18 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
     cubGameData?.liveData?.plays?.currentPlay?.matchup?.batter?.id;
   const currentBatter =
     cubGameData?.gameData?.players?.[`ID${batterId}`]?.primaryNumber;
-  const ballCount = cubGameData?.liveData?.plays?.currentPlay?.count?.balls;
-  const strikeCount = cubGameData?.liveData?.plays?.currentPlay?.count?.strikes;
-  const outs = cubGameData?.liveData?.linescore?.outs;
+  let ballCount = cubGameData?.liveData?.plays?.currentPlay?.count?.balls;
+  if (ballCount >= 4 || !ballCount) {
+    ballCount = 0;
+  }
+  let strikeCount = cubGameData?.liveData?.plays?.currentPlay?.count?.strikes;
+  if (strikeCount >= 3 || !strikeCount) {
+    strikeCount = 0;
+  }
+  let outs = cubGameData?.liveData?.linescore?.outs;
+  if (outs >= 3 || !outs) {
+    outs = 0;
+  }
   const isCubsHome = cubGameData?.gameData?.teams?.home?.abbreviation === "CHC";
   const cubsHits = isCubsHome
     ? cubGameData?.liveData?.linescore?.teams?.home?.hits
@@ -84,6 +93,9 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
 
   const testScores = false;
   
+  console.log("ballCount", ballCount)
+  console.log("strikeCount", strikeCount)
+  console.log("outs", outs)
   return (
     <View style={[styles.container, { marginBottom: -(imageWidth / 900) }]}>
       <View
