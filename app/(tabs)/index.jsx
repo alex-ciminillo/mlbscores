@@ -265,7 +265,7 @@ export default function HomeScreen() {
           zIndex: -1
         }}
       >
-        <source src={require("@/assets/videos/Final Video Try 2.mp4")} type="video/mp4" />
+        <source src={require("@/assets/videos/Final Video Try 3.mp4")} type="video/mp4" />
       </video>
         <ImageBackground
           source={require("@/assets/images/wrigley-no-clouds.png")}
