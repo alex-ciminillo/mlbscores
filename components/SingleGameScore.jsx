@@ -32,8 +32,7 @@ export function SingleGameScore({ game, red, label, imageWidth, cubs }) {
   let awayTotal = game
     ? innings.reduce((total, inning) => total + (inning.away?.runs || 0), 0)
     : " ";
-console.log("homeTotal", homeTotal)
-console.log("awayTotal", awayTotal)
+
     // homeTotal and awayTotal should be " " if the game has not started yet
     /* datetime looks like this: {
     "dateTime": "2025-05-24T20:10:00Z",
@@ -45,7 +44,7 @@ console.log("awayTotal", awayTotal)
 } */ 
 let beforeGame = false;
   if (homeTeam.teamName === "Red Sox") {
-    console.log("home",game?.gameData?.datetime?.dateTime)
+    
   }
     if (game?.gameData?.datetime?.dateTime) {
       const gameDate = new Date(game?.gameData?.datetime?.dateTime);
@@ -57,8 +56,7 @@ let beforeGame = false;
         beforeGame = true;
       }
     }
-    console.log("homeTotal2", homeTotal)
-    console.log("awayTotal2", awayTotal)
+
   const homeSPID = game?.gameData?.probablePitchers?.home?.id;
   const awaySPID = game?.gameData?.probablePitchers?.away?.id;
 
@@ -117,7 +115,6 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
   if (cubs && !isToday) {
    // check if hometeam is cubs
    if (homeTeam.teamName === "Cubs") {
-    console.log("this is true")
     let teamName = awayTeam.teamName;
     // change away team name to "[teamName MM/DD]"
     newAwayTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
@@ -125,7 +122,6 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
    newHomeTeamName = `${homeTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
   }
    if (awayTeam.teamName === "Cubs") {
-    console.log("this is true")
     let teamName = homeTeam.teamName;
     // change home team name to "[teamName MM/DD]"
     newHomeTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
@@ -136,8 +132,6 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
    
   }
 
-  console.log("game", game)
-  console.log()
 
   return (
     <View

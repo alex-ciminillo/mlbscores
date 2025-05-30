@@ -45,19 +45,14 @@ export function MiddleSectionTop({ gamesToday, cubGameData, imageWidth }) {
   });
 
   function splitToDigits(num) {
-    console.log(num);
+ 
     if (!num) return [null, null];
     const str = num?.toString().padStart(2, "0"); // ensures at least 2 digits
-    console.log([parseInt(str[0], 10), parseInt(str[1], 10)]);
     return [parseInt(str[0], 10), parseInt(str[1], 10)];
   }
 
   const [cubDigitOne, cubDigitTwo] = splitToDigits(cubsScore);
-  console.log("cubDigitOne", cubDigitOne)
-  console.log("cubDigitTwo", cubDigitTwo)
   const [otherDigitOne, otherDigitTwo] = splitToDigits(otherTeamScore);
-  console.log("otherDigitOne", otherDigitOne)
-  console.log("otherDigitTwo", otherDigitTwo)
 // check game over using abstractGameState and cubGameData
 //GameData to get isGameOver
    let isGameOver = cubGameData?.gameData?.status?.abstractGameState === "Final";

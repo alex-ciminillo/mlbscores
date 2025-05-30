@@ -36,12 +36,12 @@ export default function HomeScreen() {
   const getMonthGames = async () => {
     try {
       let gamesMonthly = await getUpcomingMLBGamesThisMonth();
-      console.log("gamesMonthly first", gamesMonthly)
+      
       
       // function that removes only the first upcoming Cubs game from gamesMonthly
         const today = new Date();
         const todayDate = today.toISOString().split('T')[0];
-        console.log('Looking for Cubs game on:', todayDate);
+        
         
         // Find today's date entry in the dates array
         const todayEntry = gamesMonthly?.dates?.find(date => 
@@ -49,27 +49,23 @@ export default function HomeScreen() {
         );
         
         if (!todayEntry) {
-          console.log('No games found for today');
+         
           return gamesMonthly;
         }
-        console.log("today",todayEntry)
+      
         // Find the first Cubs game in today's games
         const cubsGame = todayEntry?.games?.find(game => {
           const isCubsAway = game.teams.away.team.name === 'Chicago Cubs';
           const isCubsHome = game.teams.home.team.name === 'Chicago Cubs';
           if (isCubsAway || isCubsHome) {
-            console.log('Found Cubs game:', {
-              gamePk: game.gamePk,
-              away: game.teams.away.team.name,
-              home: game.teams.home.team.name
-            });
+           
             return true;
           }
           return false;
         });
         
         if (!cubsGame) {
-          console.log('No Cubs game found in today\'s games');
+         
           // return gamesMonthly;
         }
         
@@ -106,8 +102,7 @@ export default function HomeScreen() {
         
         
 
-      
-      console.log("gamesMonthly", gamesMonthly)
+   
       setGameDataMonthly(gamesMonthly);
 
       // Find next Cubs game in gamesMonthly
@@ -116,7 +111,7 @@ export default function HomeScreen() {
 
       const nextCubsGame = gamesMonthly?.dates?.flatMap(date => date.games)
         .find(game => isCubsTeam(game.teams.away.team) || isCubsTeam(game.teams.home.team));
-      console.log("nextCubsGame", nextCubsGame)
+     
       if (nextCubsGame) {
         setNextCubGameData(nextCubsGame);
       }
@@ -128,7 +123,7 @@ export default function HomeScreen() {
 
   const getYesterdayGames = async () => {
     const gamesYesterday = await getMLBGamesYesterday();
-    console.log("gamesYesterday", gamesYesterday)
+   
   };
 
   useEffect(() => {
@@ -211,7 +206,7 @@ export default function HomeScreen() {
         game?.gameData?.teams?.away?.name !== "Chicago Cubs" &&
         game?.gameData?.teams?.home?.name !== "Chicago Cubs"
     );
-    console.log("setting national games")
+ 
     const nationalGames = remainingGames.filter((game) =>
       game?.gameData?.teams?.home?.league?.name === "National League"
   )

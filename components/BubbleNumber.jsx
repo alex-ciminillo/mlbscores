@@ -2,10 +2,10 @@ import React from "react";
 import { View } from "react-native";
 
 export function BubbleNumber({ number, imageWidth, hide }) {
-  console.log("number", number)
+  
   // if the number is a string, change to a number
   if (!number && number !== 0) return null;
-  console.log("hide")
+
   const bubbleFont = {
     0: [
       [0, 1, 1, 1, 0],

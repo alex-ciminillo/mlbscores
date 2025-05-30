@@ -9,6 +9,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
     cubGameData?.liveData?.plays?.currentPlay?.matchup?.batter?.id;
   const currentBatter =
     cubGameData?.gameData?.players?.[`ID${batterId}`]?.primaryNumber;
+    console.log("currentBatter", currentBatter)
   let ballCount = cubGameData?.liveData?.plays?.currentPlay?.count?.balls;
   if (ballCount >= 4 || !ballCount) {
     ballCount = 0;
@@ -93,9 +94,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
 
   const testScores = false;
   
-  console.log("ballCount", ballCount)
-  console.log("strikeCount", strikeCount)
-  console.log("outs", outs)
+ 
   return (
     <View style={[styles.container, { marginBottom: -(imageWidth / 900) }]}>
       <View
@@ -124,7 +123,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
           <BubbleNumber
             imageWidth={imageWidth}
             number={testScores ? "0" : batterDigitOne === 0 ? "0" : batterDigitOne ? batterDigitOne : 0}
-            hide={!testScores || batterDigitOne === 0}
+            hide={batterDigitOne === 0}
           />
         </Text>
         <Text
