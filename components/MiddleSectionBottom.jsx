@@ -5,11 +5,13 @@ import { Image } from "react-native";
 import { BubbleNumber } from "../components/BubbleNumber";
 
 export function MiddleSectionBottom({ cubGameData, imageWidth }) {
+  let isGameOver = cubGameData?.gameData?.status?.abstractGameState === "Final";
+
   const batterId =
     cubGameData?.liveData?.plays?.currentPlay?.matchup?.batter?.id;
   const currentBatter =
     cubGameData?.gameData?.players?.[`ID${batterId}`]?.primaryNumber;
-    console.log("currentBatter", currentBatter)
+    
   let ballCount = cubGameData?.liveData?.plays?.currentPlay?.count?.balls;
   if (ballCount >= 4 || !ballCount) {
     ballCount = 0;
@@ -43,7 +45,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
     return [parseInt(str[0], 10), parseInt(str[1], 10)];
   }
 
-  const [batterDigitOne, batterDigitTwo] = splitToDigits(currentBatter);
+  let [batterDigitOne, batterDigitTwo] = splitToDigits(currentBatter);
 
   const styles = StyleSheet.create({
     container: {
@@ -93,7 +95,13 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
   });
 
   const testScores = false;
-  
+  if (isGameOver) {
+    batterDigitOne = null;
+    batterDigitTwo = null;
+    ballCount = null;
+    strikeCount = null;
+    outs = null;
+  }
  
   return (
     <View style={[styles.container, { marginBottom: -(imageWidth / 900) }]}>
@@ -122,7 +130,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
         >
           <BubbleNumber
             imageWidth={imageWidth}
-            number={testScores ? "0" : batterDigitOne === 0 ? "0" : batterDigitOne ? batterDigitOne : 0}
+            number={isGameOver ? "" : testScores ? "0" : batterDigitOne === 0 ? "0" : batterDigitOne ? batterDigitOne : 0}
             hide={batterDigitOne === 0}
           />
         </Text>
@@ -138,7 +146,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
         >
           <BubbleNumber
             imageWidth={imageWidth}
-            number={testScores ? "5" : batterDigitTwo || (isGameInProgress ? "0" : "")}
+            number={testScores ? "5" : batterDigitTwo || (isGameOver ? "" : "")}
       
           />
         </Text>

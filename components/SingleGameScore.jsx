@@ -220,7 +220,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                   marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null,
                   color: red && isTop && index === currentInning - 1 ? Colors.light.highlight : undefined
                 }]}>
-                  {testScores ? "0" : beforeGame || (isGameOver && index < 9) ? " " : label
+                  {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.away?.runs 
@@ -308,8 +308,8 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 index !== 0 && index % 3 === 0 && styles.borderLeft,
               ]}
             >
-              <Text style={[styles.text, { color: red && isBottom && index === currentInning - 1 ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                {testScores ? "0" : beforeGame || (isGameOver && index < 9) ? " " : label
+              <Text style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
+                {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.home?.runs 
