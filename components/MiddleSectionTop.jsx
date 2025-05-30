@@ -62,7 +62,8 @@ export function MiddleSectionTop({ gamesToday, cubGameData, imageWidth }) {
 //GameData to get isGameOver
    let isGameOver = cubGameData?.gameData?.status?.abstractGameState === "Final";
 
-isGameOver = true;
+// used to test gameover
+// isGameOver = true;
 
 // check if game went to a 10th inning by counting the number of innings in cubGameData
 let is10Innings = cubGameData?.liveData?.linescore?.innings?.length >= 10;
@@ -223,7 +224,7 @@ const testScores = false;
         <View style={{ marginBottom: -(imageWidth / 500) }}>
         {/* this should use an abbreviation for the day of the week, not the whole day spelled out */}
           {cubGameData?.gameData?.status?.abstractGameState === "Preview" ? (
-            <Text style={styles.text}>
+            <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
               {new Date(cubGameData?.gameData?.datetime?.dateTime).toLocaleString(
                 "en-US",
                 {
@@ -235,16 +236,16 @@ const testScores = false;
             )}
           </Text>
         ) : !isGameOver ? (
-          <Text style={styles.text}>
+          <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
             {cubGameData?.liveData?.linescore?.inningHalf === "top"
               ? "Top"
               : "Bottom"}{" "}
             {cubGameData?.liveData?.linescore?.currentInning}
           </Text>
         ) : is10Innings ? (
-          <Text style={styles.text}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
+          <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
         ) : (
-          <Text style={styles.text}>Final</Text>
+          <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final</Text>
         )}
         </View>
       </View>
