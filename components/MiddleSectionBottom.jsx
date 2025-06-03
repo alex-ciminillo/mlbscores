@@ -282,7 +282,7 @@ let beforeGame = false;
             width: "100%", }}>
           <View style={[styles.box, { width: imageWidth / 31,
             height: imageWidth / 65, marginLeft: imageWidth / 50 }]}>
-            <Text style={[styles.text, {color: Colors.light.highlight}]}>CHC</Text>
+            <Text style={[styles.text, {color: Colors.light.highlight}]}>CUBS</Text>
           </View>
           <View style={(styles.box, { marginLeft: imageWidth / 270,width: imageWidth / 65,
             height: imageWidth / 65,  display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" })}>
@@ -350,7 +350,7 @@ let beforeGame = false;
         </View>
         <View style={[styles.box, { marginLeft: imageWidth / 255,width: imageWidth / 31,
             height: imageWidth / 65 }]}>
-          <Text style={[styles.text, {color: Colors.light.highlight}]}>CHC</Text>
+          <Text style={[styles.text, {color: Colors.light.highlight}]}>CUBS</Text>
         </View>
       </View>
       </View>
