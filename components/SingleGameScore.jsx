@@ -312,7 +312,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : label
                   ? index + 1
                   : index < 9
-                  ? innings[index]?.home?.runs 
+                  ? innings[index]?.home?.runs || (isGameOver ? 0 : innings[index]?.home?.runs)
                   : isGameOver ? homeTotal : " "}
               </Text>
             </View>

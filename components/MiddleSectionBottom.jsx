@@ -102,6 +102,15 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
     strikeCount = null;
     outs = null;
   }
+
+let beforeGame = false;
+  if (cubGameData?.gameData?.datetime?.dateTime) {
+    const gameDate = new Date(cubGameData?.gameData?.datetime?.dateTime);
+    const currentDate = new Date();
+    if (gameDate > currentDate) {
+      beforeGame = true;
+    }
+  }
  
   return (
     <View style={[styles.container, { marginBottom: -(imageWidth / 900) }]}>
@@ -131,7 +140,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
           <BubbleNumber
             imageWidth={imageWidth}
             number={isGameOver ? "" : testScores ? "0" : batterDigitOne === 0 ? "0" : batterDigitOne ? batterDigitOne : 0}
-            hide={batterDigitOne === 0}
+            hide={batterDigitOne === 0 || beforeGame}
           />
         </Text>
         <Text
@@ -147,7 +156,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
           <BubbleNumber
             imageWidth={imageWidth}
             number={testScores ? "5" : batterDigitTwo || (isGameOver ? "" : "")}
-      
+            hide={beforeGame}
           />
         </Text>
       </View>
@@ -183,6 +192,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
                   ? "0"
                   : ""
               }
+              hide={beforeGame}
             />
           </Text>
         </View>
@@ -215,6 +225,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
                   ? "0"
                   : ""
               }
+              hide={beforeGame}
             />
           </Text>
         </View>
@@ -243,6 +254,7 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
           <BubbleNumber
             imageWidth={imageWidth}
             number={testScores ? "5" : outs !== undefined ? outs : isGameInProgress ? "0" : ""}
+            hide={beforeGame}
           />
         </Text>
       </View>
