@@ -6,8 +6,7 @@ import { MiddleSection } from "@/components/MiddleSection";
 import {
   getMLBGamesToday,
   getUpcomingMLBGamesThisMonth,
-  getLiveGameData,
-  getMLBGamesYesterday,
+  getLiveGameData
 } from "@/services/mlbapis";
 import { Colors } from "@/constants/Colors";
 import { Dimensions } from "react-native";
@@ -121,14 +120,6 @@ export default function HomeScreen() {
     }
   };
 
-  const getYesterdayGames = async () => {
-    const gamesYesterday = await getMLBGamesYesterday();
-   
-  };
-
-  useEffect(() => {
-    getYesterdayGames();
-  }, []);
 
   const getDayGames = async () => {
     const gamesDaily = await getMLBGamesToday();
@@ -143,20 +134,43 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
-    const refreshInterval = setInterval(() => {
-      getMonthGames();
-    }, 10000); // 30 seconds
+    let isMounted = true;
+    
+    const refreshData = async () => {
+      try {
+        const monthlyData = await getUpcomingMLBGamesThisMonth();
+        if (isMounted) {
+          setGameDataMonthly(monthlyData);
+        }
+      } catch (error) {
+        console.error('Error fetching monthly games:', error);
+      }
+    };
 
-    // Initial fetch
-    getMonthGames();
+    const refreshInterval = setInterval(refreshData, 10000);
+    refreshData(); // Initial fetch
 
     return () => {
       clearInterval(refreshInterval);
+      isMounted = false;
     };
   }, []);
 
   useEffect(() => {
-    getDayGames();
+    let isMounted = true;
+    
+    const fetchDayGames = async () => {
+      try {
+        const dailyData = await getMLBGamesToday();
+        if (isMounted) {
+          setGamesToday(dailyData?.dates || []);
+        }
+      } catch (error) {
+        console.error('Error fetching daily games:', error);
+      }
+    };
+
+    fetchDayGames();
   }, [gameDataMonthly]);
 
   useEffect(() => {
