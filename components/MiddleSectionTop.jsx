@@ -64,7 +64,14 @@ export function MiddleSectionTop({ gamesToday, cubGameData, imageWidth }) {
 let is10Innings = cubGameData?.liveData?.linescore?.innings?.length >= 10;
 // used to test scores
 const testScores = false;
-
+let beforeGame = false;
+  if (cubGameData?.gameData?.datetime?.dateTime) {
+    const gameDate = new Date(cubGameData?.gameData?.datetime?.dateTime);
+    const currentDate = new Date();
+    if (gameDate > currentDate) {
+      beforeGame = true;
+    }
+  }
 
   return (
     <View style={styles.wrapper}>
@@ -135,7 +142,7 @@ const testScores = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "2" : otherDigitTwo || ""}
+                number={!beforeGame && !otherDigitTwo ? 0 : testScores ? "2" : otherDigitTwo || ""}
               />
             </Text>
           </View>
@@ -200,7 +207,7 @@ const testScores = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "5" :cubDigitTwo || ""}
+                number={!beforeGame && !cubDigitTwo ? 0 : testScores ? "5" :cubDigitTwo || ""}
               />
             </Text>
           </View>
@@ -311,7 +318,7 @@ const testScores = false;
       >
         <BubbleNumber
           imageWidth={imageWidth}
-          number={testScores ? "2" : cubDigitTwo || ""}
+          number={!beforeGame && !cubDigitTwo ? 0 : testScores ? "2" : cubDigitTwo || ""}
         />
       </Text>
     </View>
@@ -376,7 +383,7 @@ const testScores = false;
       >
         <BubbleNumber
           imageWidth={imageWidth}
-          number={testScores ? "5" :otherDigitTwo || ""}
+          number={!beforeGame && !otherDigitTwo ? 0 : testScores ? "5" :otherDigitTwo || ""}
         />
       </Text>
     </View>
