@@ -13,17 +13,11 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
     cubGameData?.gameData?.players?.[`ID${batterId}`]?.primaryNumber;
     
   let ballCount = cubGameData?.liveData?.plays?.currentPlay?.count?.balls;
-  if (ballCount >= 4 || !ballCount) {
-    ballCount = 0;
-  }
+
   let strikeCount = cubGameData?.liveData?.plays?.currentPlay?.count?.strikes;
-  if (strikeCount >= 3 || !strikeCount) {
-    strikeCount = 0;
-  }
+
   let outs = cubGameData?.liveData?.linescore?.outs;
-  if (outs >= 3 || !outs) {
-    outs = 0;
-  }
+
   const isCubsHome = cubGameData?.gameData?.teams?.home?.abbreviation === "CHC";
   const cubsHits = isCubsHome
     ? cubGameData?.liveData?.linescore?.teams?.home?.hits
