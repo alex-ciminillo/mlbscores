@@ -115,19 +115,19 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
   if (cubs && !isToday) {
    // check if hometeam is cubs
    if (homeTeam.teamName === "Cubs") {
-    let teamName = awayTeam.teamName;
+    let teamName = awayTeam.clubName;
     // change away team name to "[teamName MM/DD]"
     newAwayTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
     // change home team name to "homeTeam.teamName [HH:MM AM/PM]"
-   newHomeTeamName = `${homeTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+   newHomeTeamName = `${homeTeam.clubName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
   }
    if (awayTeam.teamName === "Cubs") {
-    let teamName = homeTeam.teamName;
+    let teamName = homeTeam.clubName;
     // change home team name to "[teamName MM/DD]"
     newHomeTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
    // change away team name to "homeTeam.teamName [HH:MM AM/PM]"
    // the time should be 12 hour format
-   newAwayTeamName = `${awayTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+   newAwayTeamName = `${awayTeam.clubName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
   }
    
   }
