@@ -243,6 +243,16 @@ export default function HomeScreen() {
     }
   }, [nextCubGameData]);
 
+  useEffect(() => {
+    if (!nextCubGameData?.gamePk) return;
+
+    const intervalId = setInterval(() => {
+      getCubGame();
+    }, 8000); // fetch every 8 seconds
+
+    return () => clearInterval(intervalId); // cleanup on unmount
+  }, [nextCubGameData]);
+
   if (!fontsLoaded) {
     return (
       <AppLoading
