@@ -238,12 +238,13 @@ let beforeGame = false;
             )}
           </Text>
         ) : !isGameOver ? (
-          <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
-            {cubGameData?.liveData?.linescore?.inningHalf === "top"
-              ? "Top"
-              : "Bottom"}{" "}
-            {cubGameData?.liveData?.linescore?.currentInning}
+          <Text style={[styles.text, { marginBottom: -(imageWidth / 650) }]}>
+            {cubGameData?.liveData?.linescore?.inningState}
+            {cubGameData?.liveData?.linescore?.inningState === "Top" || cubGameData?.liveData?.linescore?.inningState === "Middle" || cubGameData?.liveData?.linescore?.inningState === "Bottom" || cubGameData?.liveData?.linescore?.inningState === "End"
+              ?" " + cubGameData?.liveData?.linescore?.currentInning
+              :""}
           </Text>
+
         ) : is10Innings ? (
           <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
         ) : (
@@ -302,7 +303,7 @@ let beforeGame = false;
       >
         <BubbleNumber
           imageWidth={imageWidth}
-          number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : ""}
+          number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : "0"}
           hide={!testScores || cubDigitOne === 0}
         />
       </Text>
@@ -367,7 +368,7 @@ let beforeGame = false;
       >
         <BubbleNumber
           imageWidth={imageWidth}
-          number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : ""}
+          number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : "0"}
           hide={!testScores || otherDigitOne === 0}
         />
       </Text>
@@ -415,10 +416,12 @@ let beforeGame = false;
     </Text>
   ) : !isGameOver ? (
     <Text style={styles.text}>
-      {cubGameData?.liveData?.linescore?.inningHalf === "top"
-        ? "Top"
-        : "Bottom"}{" "}
-      {cubGameData?.liveData?.linescore?.currentInning}
+      <Text style={[styles.text, { marginBottom: -(imageWidth / 650) }]}>
+        {cubGameData?.liveData?.linescore?.inningState}
+        {cubGameData?.liveData?.linescore?.inningState === "Top" || cubGameData?.liveData?.linescore?.inningState === "Middle" || cubGameData?.liveData?.linescore?.inningState === "Bottom" || cubGameData?.liveData?.linescore?.inningState === "End"
+          ?" " + cubGameData?.liveData?.linescore?.currentInning
+          :""}
+      </Text>
     </Text>
   ) : is10Innings ? (
     <Text style={styles.text}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>

@@ -60,6 +60,18 @@ let beforeGame = false;
   const homeSPID = game?.gameData?.probablePitchers?.home?.id;
   const awaySPID = game?.gameData?.probablePitchers?.away?.id;
 
+  const renameTeam = (teamName) => {
+    const teamNameMap = {
+      "NY Yankees": "New York (AL)",
+      "NY Mets": "New York (NL)",
+      "LA Dodgers": "Los Angeles (NL)",
+      "LA Angels": "Los Angeles (AL)",
+      "Chi Sox": "Chicago (AL)",
+      "Chi Cubs": "Cubs",
+    };
+    return teamNameMap[teamName] || teamName;
+  };
+
   const homeSP =
     homeSPID !== undefined
       ? game?.gameData?.players[`ID${homeSPID}`]?.primaryNumber ||
@@ -71,8 +83,8 @@ let beforeGame = false;
         (game ? "-" : " ")
       : "";
 
-  const homeCurrentPitcherID = game?.liveData?.linescore?.defense?.pitcher?.id;
-  const awayCurrentPitcherID = game?.liveData?.linescore?.offense?.pitcher?.id;
+  const homeCurrentPitcherID = game?.liveData?.linescore?.home?.pitcher?.id;
+  const awayCurrentPitcherID = game?.liveData?.linescore?.away?.pitcher?.id;
 
   const homeRP = isGameBlank
     ? " "
@@ -115,19 +127,19 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
   if (cubs && !isToday) {
    // check if hometeam is cubs
    if (homeTeam.teamName === "Cubs") {
-    let teamName = awayTeam.clubName;
+    let teamName = awayTeam.shortName;
     // change away team name to "[teamName MM/DD]"
     newAwayTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
     // change home team name to "homeTeam.teamName [HH:MM AM/PM]"
-   newHomeTeamName = `${homeTeam.clubName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+   newHomeTeamName = `${homeTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
   }
    if (awayTeam.teamName === "Cubs") {
-    let teamName = homeTeam.clubName;
+    let teamName = homeTeam.shortName;
     // change home team name to "[teamName MM/DD]"
     newHomeTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
    // change away team name to "homeTeam.teamName [HH:MM AM/PM]"
    // the time should be 12 hour format
-   newAwayTeamName = `${awayTeam.clubName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+   newAwayTeamName = `${awayTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
   }
    
   }
@@ -194,7 +206,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             ]}
           >
             <Text style={styles.text}>
-              {newAwayTeamName || awayTeam.teamName || (game ? "" : "")}
+              {renameTeam(newAwayTeamName || awayTeam.shortName || (game ? "" : ""))}
             </Text>
           </View>
           {Array.from({ length: 10 }).map((_, index) => (
@@ -287,7 +299,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             {/* newHomeTeamName should not wrap */}
             <Text numberOfLines={1} style={styles.text}>{newHomeTeamName}</Text>
           </View> : <Text style={styles.text}>
-            {homeTeam.teamName || (game ? "" : " ")}
+            {renameTeam(homeTeam.shortName || (game ? "" : " "))}
           </Text>}
           
         </View>
