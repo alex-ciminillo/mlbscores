@@ -19,15 +19,30 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
   let outs = cubGameData?.liveData?.linescore?.outs;
 
   const isCubsHome = cubGameData?.gameData?.teams?.home?.abbreviation === "CHC";
-  const cubsHits = isCubsHome
-    ? cubGameData?.liveData?.linescore?.teams?.home?.hits
-    : cubGameData?.liveData?.linescore?.teams?.away?.hits;
-  const otherTeamHits = isCubsHome
-    ? cubGameData?.liveData?.linescore?.teams?.away?.hits
-    : cubGameData?.liveData?.linescore?.teams?.home?.hits;
   const otherTeamAbbreviation = isCubsHome
     ? cubGameData?.gameData?.teams?.away?.abbreviation
     : cubGameData?.gameData?.teams?.home?.abbreviation;
+  
+  let cubsHits = ""
+  let otherTeamHits = ""
+  
+let beforeGame = false;
+  if (cubGameData?.gameData?.datetime?.dateTime) {
+    const gameDate = new Date(cubGameData?.gameData?.datetime?.dateTime);
+    const currentDate = new Date();
+    if (gameDate > currentDate) {
+      beforeGame = true;
+    }
+  }
+
+  if (!beforeGame) {
+  cubsHits = isCubsHome
+    ? cubGameData?.liveData?.linescore?.teams?.home?.hits
+    : cubGameData?.liveData?.linescore?.teams?.away?.hits;
+  otherTeamHits = isCubsHome
+    ? cubGameData?.liveData?.linescore?.teams?.away?.hits
+    : cubGameData?.liveData?.linescore?.teams?.home?.hits;
+  }
 
   const gameStatus = cubGameData?.gameData?.status?.abstractGameState;
   const isGameInProgress = gameStatus === "Live";
@@ -95,15 +110,6 @@ export function MiddleSectionBottom({ cubGameData, imageWidth }) {
     ballCount = null;
     strikeCount = null;
     outs = null;
-  }
-
-let beforeGame = false;
-  if (cubGameData?.gameData?.datetime?.dateTime) {
-    const gameDate = new Date(cubGameData?.gameData?.datetime?.dateTime);
-    const currentDate = new Date();
-    if (gameDate > currentDate) {
-      beforeGame = true;
-    }
   }
  
   return (

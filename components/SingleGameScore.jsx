@@ -83,8 +83,33 @@ let beforeGame = false;
         (game ? "-" : " ")
       : "";
 
-  const homeCurrentPitcherID = game?.liveData?.linescore?.home?.pitcher?.id;
-  const awayCurrentPitcherID = game?.liveData?.linescore?.away?.pitcher?.id;
+ 
+  const offensePitcherId = game?.liveData?.linescore?.offense?.pitcher?.id;
+  const defensePitcherId = game?.liveData?.linescore?.defense?.pitcher?.id;
+
+  const homePlayerIds = Object.keys(game?.liveData?.boxscore?.teams?.home?.players || {});
+  const awayPlayerIds = Object.keys(game?.liveData?.boxscore?.teams?.away?.players || {});
+
+  let homeCurrentPitcherID = null;
+  let awayCurrentPitcherID = null;
+
+  // Check if offense pitcher is on home or away
+  if (offensePitcherId) {
+    if (homePlayerIds.includes(`ID${offensePitcherId}`)) {
+      homeCurrentPitcherID = offensePitcherId;
+    } else if (awayPlayerIds.includes(`ID${offensePitcherId}`)) {
+      awayCurrentPitcherID = offensePitcherId;
+    }
+  }
+
+  // Check if defense pitcher is on home or away
+  if (defensePitcherId) {
+    if (homePlayerIds.includes(`ID${defensePitcherId}`)) {
+      homeCurrentPitcherID = defensePitcherId;
+    } else if (awayPlayerIds.includes(`ID${defensePitcherId}`)) {
+      awayCurrentPitcherID = defensePitcherId;
+    }
+  }
 
   const homeRP = isGameBlank
     ? " "
