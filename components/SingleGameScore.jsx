@@ -177,7 +177,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               styles.backgroundTint,
             ]}
           >
-            <Text style={styles.text}>{isGameOver ? " " : awaySP || (game ? "-" : "")}</Text>
+            <Text selectable={false} style={styles.text}>{isGameOver ? " " : awaySP || (game ? "-" : "")}</Text>
           </View>
           <View
             aria-label="away-RP"
@@ -193,7 +193,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               styles.backgroundTint,
             ]}
           >
-            <Text style={styles.text}>{isGameOver ? " " : awayRP}</Text>
+            <Text selectable={false} style={styles.text}>{isGameOver ? " " : awayRP}</Text>
           </View>
           <View
             aria-label="away-name"
@@ -209,7 +209,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               styles.backgroundTint,
             ]}
           >
-            <Text style={styles.text}>
+            <Text selectable={false} style={styles.text}>
               {renameTeam(newAwayTeamName || awayTeam.shortName || (game ? "" : ""))}
             </Text>
           </View>
@@ -231,7 +231,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                   index !== 0 && index % 3 === 0 && styles.borderLeft,
                 ]}
               >
-                <Text style={[styles.text, { 
+                <Text selectable={false} style={[styles.text, { 
                   paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null,
                   marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null,
                   color: red && isTop && index === currentInning - 1 ? Colors.light.highlight : undefined
@@ -271,7 +271,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             styles.backgroundTint,
           ]}
         >
-          <Text style={styles.text}>
+          <Text selectable={false} style={styles.text}>
             {label ? "SP" : isGameOver ? " " : homeSP || (game ? "-" : " ")}
           </Text>
         </View>
@@ -288,7 +288,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
             styles.backgroundTint,
           ]}
         >
-          <Text style={styles.text}>{label ? "RP" : isGameOver ? " " : homeRP}</Text>
+          <Text selectable={false} style={styles.text}>{label ? "RP" : isGameOver ? " " : homeRP}</Text>
         </View>
         <View
           aria-label="home-name"
@@ -305,8 +305,8 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
         > 
           {newHomeTeamName ? <View>
             {/* newHomeTeamName should not wrap */}
-            <Text numberOfLines={1} style={styles.text}>{newHomeTeamName}</Text>
-          </View> : <Text style={styles.text}>
+            <Text selectable={false} numberOfLines={1} style={styles.text}>{newHomeTeamName}</Text>
+          </View> : <Text selectable={false} style={styles.text}>
             {renameTeam(homeTeam.shortName || (game ? "" : " "))}
           </Text>}
           
@@ -328,7 +328,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 index !== 0 && index % 3 === 0 && styles.borderLeft,
               ]}
             >
-              <Text style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
+              <Text selectable={false} style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
                 {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
                   ? innings
                       .filter(inning => inning.num >= 10)

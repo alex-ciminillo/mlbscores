@@ -96,7 +96,7 @@ let beforeGame = false;
               source={require("@/assets/images/cubs.png")}
               style={styles.image}
             /> */}
-            <Text style={[styles.text, { fontSize: imageWidth / 35 }]}>
+            <Text selectable={false} style={[styles.text, { fontSize: imageWidth / 35 }]}>
               {otherTeamAbbreviation}
             </Text>
           </View>
@@ -114,7 +114,7 @@ let beforeGame = false;
               },
             ]}
           >
-            <Text
+            <Text selectable={false}
               style={[
                 styles.text,
                 {
@@ -130,7 +130,7 @@ let beforeGame = false;
                 hide={!testScores || otherDigitOne === 0}
               />
             </Text>
-            <Text
+            <Text selectable={false}
               style={[
                 styles.text,
                 {
@@ -161,7 +161,7 @@ let beforeGame = false;
               },
             ]}
           >
-            <Text style={[styles.text, { fontSize: imageWidth / 35 }]}>
+            <Text selectable={false} style={[styles.text, { fontSize: imageWidth / 35 }]}>
               CHC
             </Text>
           </View>
@@ -179,7 +179,7 @@ let beforeGame = false;
               },
             ]}
           >
-            <Text
+            <Text selectable={false}
               style={[
                 styles.text,
                 {
@@ -195,7 +195,7 @@ let beforeGame = false;
                 hide={!testScores || cubDigitOne === 0}
               />
             </Text>
-            <Text
+            <Text selectable={false}
               style={[
                 styles.text,
                 {
@@ -226,7 +226,7 @@ let beforeGame = false;
         <View style={{ marginBottom: -(imageWidth / 500) }}>
         {/* this should use an abbreviation for the day of the week, not the whole day spelled out */}
           {cubGameData?.gameData?.status?.abstractGameState === "Preview" ? (
-            <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
+            <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
               {new Date(cubGameData?.gameData?.datetime?.dateTime).toLocaleString(
                 "en-US",
                 {
@@ -238,7 +238,7 @@ let beforeGame = false;
             )}
           </Text>
         ) : !isGameOver ? (
-          <Text style={[styles.text, { marginBottom: -(imageWidth / 650) }]}>
+          <Text selectable={false} style={[styles.text, { marginBottom: -(imageWidth / 650) }]}>
             {cubGameData?.liveData?.linescore?.inningState}
             {cubGameData?.liveData?.linescore?.inningState === "Top" || cubGameData?.liveData?.linescore?.inningState === "Middle" || cubGameData?.liveData?.linescore?.inningState === "Bottom" || cubGameData?.liveData?.linescore?.inningState === "End"
               ?" " + cubGameData?.liveData?.linescore?.currentInning
@@ -246,9 +246,9 @@ let beforeGame = false;
           </Text>
 
         ) : is10Innings ? (
-          <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
+          <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
         ) : (
-          <Text style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final</Text>
+          <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>Final</Text>
         )}
         </View>
       </View>
@@ -273,7 +273,7 @@ let beforeGame = false;
         source={require("@/assets/images/cubs.png")}
         style={styles.image}
       /> */}
-      <Text style={[styles.text, { fontSize: imageWidth / 35 }]}>
+      <Text selectable={false} style={[styles.text, { fontSize: imageWidth / 35 }]}>
         CHC
       </Text>
     </View>
@@ -291,7 +291,7 @@ let beforeGame = false;
         },
       ]}
     >
-      <Text
+      <Text selectable={false}
         style={[
           styles.text,
           {
@@ -307,7 +307,7 @@ let beforeGame = false;
           hide={!testScores || cubDigitOne === 0}
         />
       </Text>
-      <Text
+      <Text selectable={false}
         style={[
           styles.text,
           {
@@ -338,7 +338,7 @@ let beforeGame = false;
         },
       ]}
     >
-      <Text style={[styles.text, { fontSize: imageWidth / 35 }]}>
+      <Text selectable={false} style={[styles.text, { fontSize: imageWidth / 35 }]}>
         {otherTeamAbbreviation}
       </Text>
     </View>
@@ -356,7 +356,7 @@ let beforeGame = false;
         },
       ]}
     >
-      <Text
+      <Text selectable={false}
         style={[
           styles.text,
           {
@@ -372,7 +372,7 @@ let beforeGame = false;
           hide={!testScores || otherDigitOne === 0}
         />
       </Text>
-      <Text
+      <Text selectable={false}
         style={[
           styles.text,
           {
@@ -403,7 +403,7 @@ let beforeGame = false;
   <View style={{ marginBottom: -(imageWidth / 500) }}>
   {/* this should use an abbreviation for the day of the week, not the whole day spelled out */}
     {cubGameData?.gameData?.status?.abstractGameState === "Preview" ? (
-      <Text style={styles.text}>
+      <Text selectable={false} style={styles.text}>
         {new Date(cubGameData?.gameData?.datetime?.dateTime).toLocaleString(
           "en-US",
           {
@@ -415,8 +415,8 @@ let beforeGame = false;
       )}
     </Text>
   ) : !isGameOver ? (
-    <Text style={styles.text}>
-      <Text style={[styles.text, { marginBottom: -(imageWidth / 650) }]}>
+    <Text selectable={false} style={styles.text}>
+      <Text selectable={false} style={[styles.text, { marginBottom: -(imageWidth / 650) }]}>
         {cubGameData?.liveData?.linescore?.inningState}
         {cubGameData?.liveData?.linescore?.inningState === "Top" || cubGameData?.liveData?.linescore?.inningState === "Middle" || cubGameData?.liveData?.linescore?.inningState === "Bottom" || cubGameData?.liveData?.linescore?.inningState === "End"
           ?" " + cubGameData?.liveData?.linescore?.currentInning
@@ -424,9 +424,9 @@ let beforeGame = false;
       </Text>
     </Text>
   ) : is10Innings ? (
-    <Text style={styles.text}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
+    <Text selectable={false} style={styles.text}>Final/{cubGameData?.liveData?.linescore?.innings?.length}</Text>
   ) : (
-    <Text style={styles.text}>Final</Text>
+    <Text selectable={false} style={styles.text}>Final</Text>
   )}
   </View>
 </View>
