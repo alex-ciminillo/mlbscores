@@ -126,7 +126,7 @@ let beforeGame = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : ""}
+                number={testScores ? "6" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : ""}
                 hide={!testScores || otherDigitOne === 0}
               />
             </Text>
@@ -191,7 +191,7 @@ let beforeGame = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : ""}
+                number={testScores ? "8" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : ""}
                 hide={!testScores || cubDigitOne === 0}
               />
             </Text>
@@ -207,7 +207,7 @@ let beforeGame = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={!beforeGame && !cubDigitTwo ? 0 : testScores ? "5" :cubDigitTwo || ""}
+                number={!beforeGame && !cubDigitTwo ? 0 : testScores ? "9" :cubDigitTwo === 0 ? "0" :cubDigitTwo || ""}
               />
             </Text>
           </View>

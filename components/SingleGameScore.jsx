@@ -128,18 +128,22 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
    // check if hometeam is cubs
    if (homeTeam.teamName === "Cubs") {
     let teamName = awayTeam.shortName;
-    // change away team name to "[teamName MM/DD]"
-    newAwayTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
-    // change home team name to "homeTeam.teamName [HH:MM AM/PM]"
-   newHomeTeamName = `${homeTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+       if(beforeGame) {
+       // change away team name to "[teamName MM/DD]"
+      newAwayTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
+      // change home team name to "homeTeam.teamName [HH:MM AM/PM]"
+      newHomeTeamName = `${homeTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+    }
   }
    if (awayTeam.teamName === "Cubs") {
     let teamName = homeTeam.shortName;
-    // change home team name to "[teamName MM/DD]"
-    newHomeTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
-   // change away team name to "homeTeam.teamName [HH:MM AM/PM]"
-   // the time should be 12 hour format
-   newAwayTeamName = `${awayTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+    if(beforeGame) {
+      // change home team name to "[teamName MM/DD]"
+      newHomeTeamName = `${teamName} ${date.getMonth() + 1}/${date.getDate()}`;
+      // change away team name to "homeTeam.teamName [HH:MM AM/PM]"
+      // the time should be 12 hour format
+      newAwayTeamName = `${awayTeam.teamName} ${date.getHours() % 12}:${String(date.getMinutes()).padStart(2, '0')} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+    }
   }
    
   }
@@ -232,11 +236,15 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                   marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null,
                   color: red && isTop && index === currentInning - 1 ? Colors.light.highlight : undefined
                 }]}>
-                  {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : label
+                  {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
+                  ? innings
+                      .filter(inning => inning.num >= 10)
+                      .reduce((sum, inning) => sum + (inning.home?.runs || 0), 0)
+                  : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.away?.runs 
-                  : isGameOver ? awayTotal : " "}
+                  : (isGameOver && !red) ? awayTotal : " "}
                 </Text>
               </View>
               {index % 3 === 2 && (
@@ -321,11 +329,15 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               ]}
             >
               <Text style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : label
+                {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
+                  ? innings
+                      .filter(inning => inning.num >= 10)
+                      .reduce((sum, inning) => sum + (inning.home?.runs || 0), 0)
+                  : label
                   ? index + 1
                   : index < 9
                   ? innings[index]?.home?.runs || (isGameOver ? 0 : innings[index]?.home?.runs)
-                  : isGameOver ? homeTotal : " "}
+                  : (isGameOver && !red) ? homeTotal : " "}
               </Text>
             </View>
             {index % 3 === 2 && (
