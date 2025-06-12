@@ -29,9 +29,7 @@ export default function HomeScreen() {
   const [nextCubGameData, setNextCubGameData] = useState({});
   const [cubGameData, setCubGameData] = useState({});
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
   
-
   const getMonthGames = async () => {
     try {
       let gamesMonthly = await getUpcomingMLBGamesThisMonth();
@@ -268,8 +266,9 @@ export default function HomeScreen() {
       source={require("@/assets/images/Clouds.jpg")}
       style={styles.cloudImage}
     >
+
       <View style={styles.imageContainer}>
-      <video
+      {/*<video
         autoPlay
         loop
         muted
@@ -285,7 +284,7 @@ export default function HomeScreen() {
         }}
       >
         <source src={require("@/assets/videos/Final Video Try 3.mp4")} type="video/mp4" />
-      </video>
+      </video>*/}
         <ImageBackground
           source={require("@/assets/images/wrigley-no-clouds.png")}
           style={styles.image}
@@ -300,7 +299,7 @@ export default function HomeScreen() {
             justifyContent: "center",
           }}
         >
-          <TheCrown imageWidth={imageWidth} />
+        <TheCrown imageWidth={imageWidth} />
         </View>
         <View
           id="bottom"
@@ -347,6 +346,7 @@ export default function HomeScreen() {
         </View>
         </ImageBackground>
       </View>
+
     </ImageBackground>
   );
 }
