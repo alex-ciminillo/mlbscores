@@ -267,7 +267,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                       .reduce((sum, inning) => sum + (inning.away?.runs || 0), 0)
                   : label
                   ? index + 1
-                  : index < 9
+                  : index < 10
                   ? innings[index]?.away?.runs 
                   : (isGameOver && !red) ? awayTotal : " "}
                 </Text>
@@ -360,7 +360,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                       .reduce((sum, inning) => sum + (inning.home?.runs || 0), 0)
                   : label
                   ? index + 1
-                  : index < 9
+                  : index < 10
                   ? innings[index]?.home?.runs || (isGameOver ? 0 : innings[index]?.home?.runs)
                   : (isGameOver && !red) ? homeTotal : " "}
               </Text>
