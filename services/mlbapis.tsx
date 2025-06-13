@@ -5,7 +5,7 @@ import axios from 'axios';
 export const getMLBGamesToday = async () => {
   const url = 'https://statsapi.mlb.com/api/v1/schedule';
 
-  const today = new Date();
+  {/*const today = new Date();
   let startDate;
   // if current time is past 9 am
   if (today.getHours() >= 9) {
@@ -15,7 +15,15 @@ export const getMLBGamesToday = async () => {
 // startDate will be yesterday at midnight
     startDate = new Date(today.setDate(today.getDate() - 1)).toISOString().split('T')[0];
 
+  }*/}
+  const today = new Date();
+  let startDate;
+  if (today.getHours() >= 9) {
+    startDate = new Date(today.toISOString().split('T')[0]).toISOString().split('T')[0];
+  } else {
+    startDate = new Date(today.setDate(today.getDate() - 1)).toISOString().split('T')[0];
   }
+
   const params = {
     sportId: 1, 
     date: startDate,
