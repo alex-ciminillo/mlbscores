@@ -66,7 +66,7 @@ let beforeGame = false;
       "NY Mets": "New York (NL)",
       "LA Dodgers": "Los Angeles (NL)",
       "LA Angels": "Los Angeles (AL)",
-      "Chi Sox": "Chicago (AL)",
+      "Chi White Sox": "Chicago (AL)",
       "Chi Cubs": "Cubs",
     };
     return teamNameMap[teamName] || teamName;
@@ -259,12 +259,12 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 <Text selectable={false} style={[styles.text, { 
                   paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null,
                   marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null,
-                  color: red && isTop && index === currentInning - 1 ? Colors.light.highlight : undefined
+                  color: red && isTop && index === currentInning - 1  && innings[index]?.away?.runs !== 0 ? Colors.light.highlight : undefined
                 }]}>
                   {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
                   ? innings
                       .filter(inning => inning.num >= 10)
-                      .reduce((sum, inning) => sum + (inning.home?.runs || 0), 0)
+                      .reduce((sum, inning) => sum + (inning.away?.runs || 0), 0)
                   : label
                   ? index + 1
                   : index < 9
@@ -353,7 +353,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                 index !== 0 && index % 3 === 0 && styles.borderLeft,
               ]}
             >
-              <Text selectable={false} style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
+              <Text selectable={false} style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver && innings[index]?.away?.runs !== 0 ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
                 {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
                   ? innings
                       .filter(inning => inning.num >= 10)
