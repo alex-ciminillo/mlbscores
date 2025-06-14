@@ -261,13 +261,13 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                   marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null,
                   color: red && isTop && index === currentInning - 1  && innings[index]?.away?.runs !== 0 ? Colors.light.highlight : undefined
                 }]}>
-                  {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
+                  {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : ((!isGameOver || (isGameOver && red)) && currentInning > 10 && index === 9)
                   ? innings
                       .filter(inning => inning.num >= 10)
                       .reduce((sum, inning) => sum + (inning.away?.runs || 0), 0)
                   : label
                   ? index + 1
-                  : index < 10
+                  : index < 10 && (!isGameOver || red)
                   ? innings[index]?.away?.runs 
                   : (isGameOver && !red) ? awayTotal : " "}
                 </Text>
@@ -354,13 +354,13 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
               ]}
             >
               <Text selectable={false} style={[styles.text, { color: red && isBottom && index === currentInning - 1 && !isGameOver && innings[index]?.away?.runs !== 0 ? Colors.light.highlight : undefined, paddingLeft: index === 0 ? imageWidth / 280 : index === 3 ? imageWidth / 355 : index === 6 ? imageWidth / 525 : null, marginLeft: index === 2 ? -(imageWidth / 155) : index === 4 ? -(imageWidth / 575) : index === 5 ? -(imageWidth / 145) : index === 7 ? -(imageWidth / 615) : index === 8 ? -(imageWidth / 135) : null }]}>
-                {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : (!isGameOver && currentInning > 10 && index === 9)
+                {testScores ? "0" : beforeGame || (isGameOver && index < 9 && !red) ? " " : ((!isGameOver || (isGameOver && red)) && currentInning > 10 && index === 9)
                   ? innings
                       .filter(inning => inning.num >= 10)
                       .reduce((sum, inning) => sum + (inning.home?.runs || 0), 0)
                   : label
                   ? index + 1
-                  : index < 10
+                  : index < 10 && (!isGameOver || red)
                   ? innings[index]?.home?.runs || (isGameOver ? 0 : innings[index]?.home?.runs)
                   : (isGameOver && !red) ? homeTotal : " "}
               </Text>
