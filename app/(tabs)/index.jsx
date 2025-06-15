@@ -36,6 +36,7 @@ export default function HomeScreen() {
       
       
       // function that removes only the first upcoming Cubs game from gamesMonthly
+        
         const today = new Date();
         const todayDate = today.toISOString().split('T')[0];
         

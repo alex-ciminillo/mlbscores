@@ -361,7 +361,7 @@ const date = new Date(game?.gameData?.datetime?.dateTime);
                   : label
                   ? index + 1
                   : index < 10 && (!isGameOver || red)
-                  ? innings[index]?.home?.runs || (isGameOver ? 0 : innings[index]?.home?.runs)
+                  ? innings[index]?.home?.runs || (isGameOver && index < 9 ? 0 : innings[index]?.home?.runs)
                   : (isGameOver && !red) ? homeTotal : " "}
               </Text>
             </View>
