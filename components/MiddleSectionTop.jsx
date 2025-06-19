@@ -229,6 +229,10 @@ let beforeGame = false;
             <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
               {cubGameData?.gameData?.status?.detailedState}
           </Text>
+        ) : (cubGameData?.gameData?.game?.doubleHeader !== "N" && new Date(cubGameData?.gameData?.datetime?.dateTime) - new Date() > 2 * 24 * 60 * 60 * 1000) ? (
+          <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
+              Rescheduled
+          </Text>
         ) : cubGameData?.gameData?.status?.abstractGameState === "Preview" ? (
             <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
               {new Date(cubGameData?.gameData?.datetime?.dateTime).toLocaleString(
