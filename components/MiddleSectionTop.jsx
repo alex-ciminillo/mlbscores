@@ -15,7 +15,7 @@ export function MiddleSectionTop({ gamesToday, cubGameData, imageWidth }) {
   const otherTeamAbbreviation = isCubsHome
     ? cubGameData?.gameData?.teams?.away?.abbreviation
     : cubGameData?.gameData?.teams?.home?.abbreviation;
-
+  
   const styles = StyleSheet.create({
     wrapper: {
       flexDirection: "column",
@@ -224,16 +224,14 @@ let beforeGame = false;
         }}
       >
         <View style={{ marginBottom: -(imageWidth / 500) }}>
-        {/* this should use an abbreviation for the day of the week, not the whole day spelled out */}
-          {cubGameData?.gameData?.status?.detailedState === "Postponed" ? (
+        {/* This needs fixed. Need to check the schedule to find detailed state. If detailed state in the schedule api is "Postponed" then set text to "Postponed" 
+          {cubGame?.status?.detailedState === "Postponed" ? (
             <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
-              {cubGameData?.gameData?.status?.detailedState}
+              {cubGameData?.status?.detailedState}
           </Text>
-        ) : (cubGameData?.gameData?.game?.doubleHeader !== "N" && new Date(cubGameData?.gameData?.datetime?.dateTime) - new Date() > 2 * 24 * 60 * 60 * 1000) ? (
-          <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
-              Rescheduled
-          </Text>
-        ) : cubGameData?.gameData?.status?.abstractGameState === "Preview" ? (
+        ) : */}
+{/* this should use an abbreviation for the day of the week, not the whole day spelled out */}
+        {cubGameData?.gameData?.status?.abstractGameState === "Preview" ? (
             <Text selectable={false} style={[styles.text, {marginBottom: -(imageWidth / 650)}]}>
               {new Date(cubGameData?.gameData?.datetime?.dateTime).toLocaleString(
                 "en-US",
