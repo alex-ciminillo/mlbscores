@@ -314,8 +314,8 @@ let beforeGame = false;
       >
         <BubbleNumber
           imageWidth={imageWidth}
-          number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : "0"}
-          hide={!testScores || cubDigitOne === 0}
+          number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : beforeGame ? "" : "0"}
+          hide={cubDigitOne === 0}
         />
       </Text>
       <Text selectable={false}
@@ -379,7 +379,7 @@ let beforeGame = false;
       >
         <BubbleNumber
           imageWidth={imageWidth}
-          number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : "0"}
+          number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : beforeGame ? "" : "0"}
           hide={otherDigitOne === 0}
         />
       </Text>
