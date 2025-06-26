@@ -380,7 +380,7 @@ let beforeGame = false;
         <BubbleNumber
           imageWidth={imageWidth}
           number={testScores ? "0" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : beforeGame ? "" : "0"}
-          hide={otherDigitOne === 0}
+          hide={otherDigitOne === 0 || otherTeamScore < 10}
         />
       </Text>
       <Text selectable={false}
