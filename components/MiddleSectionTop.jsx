@@ -191,7 +191,7 @@ let beforeGame = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "8" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : "0"}
+                number={testScores ? "8" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : ""}
                 hide={cubDigitOne === 0}
               />
             </Text>
