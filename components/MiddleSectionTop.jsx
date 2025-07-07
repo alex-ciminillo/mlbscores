@@ -126,8 +126,8 @@ let beforeGame = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "1" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : ""}
-                hide={otherDigitOne === 0}
+                number={testScores ? "1" : otherDigitOne === 0 ? "0" : otherDigitOne ? otherDigitOne : "0"}
+                hide={otherDigitOne === 0 || otherTeamScore < 10 }
               />
             </Text>
             <Text selectable={false}
@@ -191,8 +191,8 @@ let beforeGame = false;
             >
               <BubbleNumber
                 imageWidth={imageWidth}
-                number={testScores ? "8" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : ""}
-                hide={cubDigitOne === 0}
+                number={testScores ? "8" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : "0"}
+                hide={cubDigitOne === 0 || cubsScore < 10 }
               />
             </Text>
             <Text selectable={false}
@@ -315,7 +315,7 @@ let beforeGame = false;
         <BubbleNumber
           imageWidth={imageWidth}
           number={testScores ? "0" : cubDigitOne === 0 ? "0" : cubDigitOne ? cubDigitOne : beforeGame ? "" : "0"}
-          hide={cubDigitOne === 0}
+          hide={cubDigitOne === 0 || cubsScore < 10}
         />
       </Text>
       <Text selectable={false}
